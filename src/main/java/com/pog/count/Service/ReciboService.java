@@ -2,6 +2,7 @@ package com.pog.count.Service;
 
 import com.pog.count.Entity.Recibo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -13,12 +14,14 @@ public class ReciboService {
 
     public Recibo calculo(final List<BigDecimal> nums) {
 
+        Assert.isTrue(nums.size() >= 20, "Envio no minimo 20 numeros");
+
         Recibo recibo = new Recibo(media(nums), desvioPadrao(nums), mediana(nums), nums.size());
 
         return recibo;
     }
 
-    public BigDecimal media (final List<BigDecimal> nums){
+    public BigDecimal media(final List<BigDecimal> nums){
         BigDecimal total = BigDecimal.ZERO;
         for (BigDecimal num : nums)
         {
